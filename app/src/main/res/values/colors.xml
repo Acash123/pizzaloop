@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#2f333f</color>
+    <color name="green">#45bc62</color>
+    <color name="bluelight">#49acd5</color>
+    <color name="orange">#eaad43</color>
+    <color name="white">#fff</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="kindagrey">#0FF3F3F3</color>
+    <color name="kindablue">#140b25</color>
+</resources>

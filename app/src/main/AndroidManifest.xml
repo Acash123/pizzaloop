@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.pizzaloop">
+    <uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/icon_loop"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/icon"
+        android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".LoginUser"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ReviewOrder"/>
+        <activity android:name=".EditOrder"/>
+        <activity android:name=".OrderCRUD"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ReviewPayment"/>
+        <activity android:name=".Payment"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".WelcomePage"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".SignUp"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".DetailActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".ReviewDetails"/>
+        <activity android:name=".ReviewMain"/>
+        <activity android:name=".SplashScreen"
+            android:screenOrientation="portrait">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@color/colorPrimaryDark"
+    android:orientation="vertical"
+    android:padding="5dp"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+
+
+    >
+
+    <TextView
+        android:id="@+id/txtclose"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="end"
+        android:background="@drawable/cerclebackground"
+        android:gravity="center"
+        android:onClick="ExitPayment"
+        android:text="X"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <pl.droidsonroids.gif.GifImageView
+            android:layout_width="145dp"
+            android:layout_height="130dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="15dp"
+            android:background="#00000000"
+            android:src="@drawable/bike" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/bubble"
+            android:text="SUBMIT ORDER"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
+
+        <RadioGroup
+            android:id="@+id/addressMethod"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:fontFamily="@font/kanit_regular"
+                android:textStyle="bold"
+                android:id="@+id/userAd"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/popup_radiostyles"
+                android:button="@drawable/user_ad"
+                android:onClick="addressCheck"
+                android:text="User Address"
+                android:textColor="@color/white" />
+
+
+            <RadioButton
+                android:fontFamily="@font/kanit_regular"
+                android:textStyle="bold"
+                android:id="@+id/otherAd"
+                android:layout_width="170dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/popup_radiostyles"
+                android:button="@drawable/other_ad"
+                android:onClick="addressCheck"
+                android:text="Other Address"
+                android:textColor="@color/white" />
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/order_address"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="@font/kanit_regular"
+            android:hint="Shipping Address"
+            android:textColor="#F5BEBEBE"
+            android:textColorHint="#20FFFFFF" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
+
+        <RadioGroup
+
+            android:id="@+id/paymentMethod"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:fontFamily="@font/kanit_regular"
+                android:textStyle="bold"
+                android:id="@+id/creditCard"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/popup_radiostyles"
+                android:button="@drawable/c_icon"
+                android:onClick="paymentCheck"
+                android:text="Credit Card"
+                android:textColor="@color/white" />
+
+            <RadioButton
+                android:fontFamily="@font/kanit_regular"
+                android:textStyle="bold"
+                android:id="@+id/cashon"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/popup_radiostyles"
+                android:button="@drawable/cash_on"
+                android:onClick="paymentCheck"
+                android:text="Cash On Dilivery"
+                android:textColor="@color/white" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/phoneNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+
+        android:hint="PhoneNumber"
+        android:inputType="number"
+        android:textColor="#F5BEBEBE"
+
+        android:textColorHint="#20FFFFFF"
+        android:fontFamily="@font/kanit_regular"
+        android:textStyle="bold"
+        />
+
+    <Button
+        android:id="@+id/btn_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/buttonstyle"
+        android:onClick="Place_order"
+        android:text="Confirm"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="377dp"
+        android:layout_height="73dp"
+        android:textAlignment="center"
+        android:textColor="@color/white" />
+
+
+</LinearLayout>

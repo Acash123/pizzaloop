@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WelcomePage"
+    android:background="@drawable/home_background">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="90dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="30dp"
+
+        android:fontFamily="@font/kanit_regular"
+        android:text=" ONLINE ORDERING"
+        android:textColor="#fff"
+        android:textSize="20dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <ImageButton
+        android:layout_marginTop="120dp"
+        android:id="@+id/home_order"
+        android:layout_width="289dp"
+        android:background="#808080"
+        android:layout_marginStart="56dp"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/my_profile"
+        android:foregroundGravity="center"
+        android:layout_marginLeft="60dp" />
+    <ImageButton
+        android:onClick="OrderNow"
+        android:layout_marginTop="230dp"
+        android:id="@+id/home_cart"
+        android:layout_width="289dp"
+        android:background="#808080"
+        android:layout_marginStart="56dp"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/order_now"
+        android:foregroundGravity="center"
+        android:layout_marginLeft="60dp" />
+    <ImageButton
+        android:onClick="myOrders"
+        android:layout_marginTop="340dp"
+        android:id="@+id/home_profile"
+        android:layout_width="289dp"
+        android:background="#808080"
+        android:layout_marginStart="56dp"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/my_orders"
+        android:foregroundGravity="center"
+        android:layout_marginLeft="60dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PizzaLoop"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        android:layout_marginStart="96dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="60dp"
+        android:textColor="#fff"
+        android:fontFamily="@font/bb"/>
+    <ViewFlipper
+        android:layout_marginTop="440dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/v_flipper"
+        android:layout_centerHorizontal="true"/>
+
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="25dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/jumpy"
+        android:background="#00000000"
+        />
+</RelativeLayout>
