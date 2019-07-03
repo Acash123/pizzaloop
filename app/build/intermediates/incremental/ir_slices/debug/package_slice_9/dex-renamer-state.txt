@@ -1,0 +1,4 @@
+#Tue Jul 02 23:50:49 IST 2019
+base.0=C\:\\Users\\AkashRavishan\\AndroidStudioProjects\\PizzaLoop\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\9
+path.0=classes.dex
+renamed.0=classes.dex
