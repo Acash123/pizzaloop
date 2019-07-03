@@ -1,4 +1,4 @@
-package com.example.pizzaloop;
+package com.example.pizzaloop.Edit_Order;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -24,6 +24,11 @@ import com.android.volley.toolbox.Volley;
 import com.craftman.cardform.Card;
 import com.craftman.cardform.CardForm;
 import com.craftman.cardform.OnPayBtnClickListner;
+import com.example.pizzaloop.Order.Order;
+import com.example.pizzaloop.Order.OrderAdapter;
+import com.example.pizzaloop.R;
+import com.example.pizzaloop.WelcomePage;
+import com.example.pizzaloop.ipAddress;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,8 +37,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import static com.example.pizzaloop.OrderCRUD.EXTRA_OrderStatus;
 
 
 public class OrderCRUD extends AppCompatActivity implements OrderAdapter.OnItemClickListener {
@@ -98,9 +101,13 @@ check.setOnClickListener(new View.OnClickListener() {
         OrderID22=UserID.getText().toString();
         parseJSON();
 
+
     }
 });
         myDialog = new Dialog(this);
+
+
+
     }
     public void Confirm_Order(View v){
         OrderStatusCheck=orderAdapter.ORDER_STATUS();
@@ -108,9 +115,7 @@ check.setOnClickListener(new View.OnClickListener() {
             Button button=findViewById(R.id.button4);
             button.setText("ORDER CONFIRMED"); }
           else {
-            //Button button=findViewById(R.id.button4);
-              //button.setText("Pay By Credit Card");
-            //findmee();
+
 
 
 
@@ -128,7 +133,8 @@ check.setOnClickListener(new View.OnClickListener() {
                 public void onClick(Card card) {
                     Toast.makeText(OrderCRUD.this,"YOUR ORDER IS CONFIRMED :)",Toast.LENGTH_SHORT).show();
                     JSONORDER_CONFIRMED();
-
+                      Intent intent=new Intent(OrderCRUD.this,WelcomePage.class);
+                      finish();
 
                 }
             });
@@ -146,6 +152,8 @@ check.setOnClickListener(new View.OnClickListener() {
 
 
     private void JSONORDER_CONFIRMED() {
+        ipAddress ipAddress=new ipAddress();
+        String ip=ipAddress.getIpAddress();
         String UserId=orderAdapter.USER_ID();
         String OrderedPizzaName=orderAdapter.PIZZA_NAME();
         String OrderedQty= String.valueOf(orderAdapter.QTY());
@@ -156,9 +164,9 @@ check.setOnClickListener(new View.OnClickListener() {
 
          String temp="Order_Confirmed";
         String pizzaId=orderAdapter.PIZZAID();
-System.out.println("SOOOOOO"+UserId+"asas   "+OrderedPizzaName+"asas   "+OrderedQty+"asas   "+LastPrice+"asas   "+DilAdress+"asas   "+PayMethod+"asas   "+TelNo+"asas   "+temp+pizzaId);
 
-        String URLO = "http://192.168.8.185:8080/demo/updateOrder?orderId=" + OrderID22 + "&userId=" + UserId + "&pizzaName=" + OrderedPizzaName + "&qty=" + OrderedQty + "&totalPrice=" + LastPrice + "&paymentMethod=" + PayMethod + "&phoneNumber=" + TelNo + "&Address=" + DilAdress + "&OrderStatus=" + temp + "&pizzaId=" + pizzaId;
+
+        String URLO = "http://"+ip+":8080/demo/updateOrder?orderId=" + OrderID22 + "&userId=" + UserId + "&pizzaName=" + OrderedPizzaName + "&qty=" + OrderedQty + "&totalPrice=" + LastPrice + "&paymentMethod=" + PayMethod + "&phoneNumber=" + TelNo + "&Address=" + DilAdress + "&OrderStatus=" + temp + "&pizzaId=" + pizzaId;
         RequestQueue queue = (RequestQueue) Volley.newRequestQueue(OrderCRUD.this);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URLO,
                 new OrderCRUD.HTTPResponseListner3(), new OrderCRUD.HTTPErrorListner3());
@@ -177,7 +185,9 @@ System.out.println("SOOOOOO"+UserId+"asas   "+OrderedPizzaName+"asas   "+Ordered
 
     //END OF CODE FOR CREDIT CARD
     private void parseJSON() {
-        String url = "http://192.168.8.185:8080/demo/findByOrderId?id="+OrderId;
+        ipAddress ipAddress=new ipAddress();
+        String ip=ipAddress.getIpAddress();
+        String url = "http://"+ip+":8080/demo/findByOrderId?id="+OrderId;
 
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url,
@@ -188,6 +198,12 @@ System.out.println("SOOOOOO"+UserId+"asas   "+OrderedPizzaName+"asas   "+Ordered
     }
 
     public void cancel_order(View v){
+
+        OrderStatusCheck=orderAdapter.ORDER_STATUS();
+        if(OrderStatusCheck.equals("Order_Confirmed")){
+            Toast.makeText(OrderCRUD.this,"YOUR ORDER IS ALREADY CONFIRMED :)",Toast.LENGTH_SHORT).show();}
+
+        else{
 
         AlertDialog.Builder builder=new AlertDialog.Builder(OrderCRUD.this);
        builder.setMessage("Do You want to Remove The Order")
@@ -202,7 +218,7 @@ System.out.println("SOOOOOO"+UserId+"asas   "+OrderedPizzaName+"asas   "+Ordered
                       timer.schedule(new TimerTask() {
                           @Override
                           public void run() {
-                              Intent intent = new Intent(OrderCRUD.this,WelcomePage.class);
+                              Intent intent = new Intent(OrderCRUD.this, WelcomePage.class);
                               startActivity(intent);
                               finish();
                           }
@@ -217,7 +233,7 @@ System.out.println("SOOOOOO"+UserId+"asas   "+OrderedPizzaName+"asas   "+Ordered
         AlertDialog alertDialog=builder.create();
         alertDialog.show();
 
-    }
+    }}
     private void parseJSON2() {
         ipAddress ipAddress=new ipAddress();
         String ip=ipAddress.getIpAddress();
@@ -234,26 +250,33 @@ System.out.println("SOOOOOO"+UserId+"asas   "+OrderedPizzaName+"asas   "+Ordered
 
     @Override
     public void onItemClick(int position) {
-        Intent detailIntent = new Intent(this, OrderCRUD.class);//ReviewMain
 
-        Intent detailIntent2 = new Intent(this, ReviewMain.class);
-        Order clickedItem = mExampleList.get(position);
+        OrderStatusCheck=orderAdapter.ORDER_STATUS();
+        if(OrderStatusCheck.equals("Order_Confirmed")){
+            Toast.makeText(OrderCRUD.this,"YOUR ORDER IS ALREADY CONFIRMED :)",Toast.LENGTH_SHORT).show();
 
+        }else {
 
-        detailIntent.putExtra(String.valueOf(EXTRA_OrderId), clickedItem.getOrderId());
-        detailIntent.putExtra(String.valueOf(EXTRA_userId), clickedItem.getUserId());
-        detailIntent.putExtra(EXTRA_pizzaName, clickedItem.getPizzaName());
-        detailIntent.putExtra(String.valueOf(EXTRA_qty),clickedItem.getQty());
-        detailIntent.putExtra(EXTRA_paymentMethod, clickedItem.getPaymentMethod());
-        detailIntent.putExtra(EXTRA_phoneNumber, clickedItem.getPhoneNumber());
-        detailIntent.putExtra(EXTRA_Address, clickedItem.getAddress());
-        detailIntent.putExtra(EXTRA_OrderStatus, clickedItem.getOrderStatus());
-        detailIntent.putExtra(EXTRA_totalPrice, clickedItem.getTotalPrice());
-        detailIntent.putExtra(EXTRA_PIZZAID,clickedItem.getPizzaId());
+            Intent detailIntent = new Intent(this, OrderCRUD.class);//ReviewMain
 
-        startActivity(detailIntent2);
+            Intent detailIntent2 = new Intent(this, ReviewMain.class);
+            Order clickedItem = mExampleList.get(position);
 
 
+            detailIntent.putExtra(String.valueOf(EXTRA_OrderId), clickedItem.getOrderId());
+            detailIntent.putExtra(String.valueOf(EXTRA_userId), clickedItem.getUserId());
+            detailIntent.putExtra(EXTRA_pizzaName, clickedItem.getPizzaName());
+            detailIntent.putExtra(String.valueOf(EXTRA_qty), clickedItem.getQty());
+            detailIntent.putExtra(EXTRA_paymentMethod, clickedItem.getPaymentMethod());
+            detailIntent.putExtra(EXTRA_phoneNumber, clickedItem.getPhoneNumber());
+            detailIntent.putExtra(EXTRA_Address, clickedItem.getAddress());
+            detailIntent.putExtra(EXTRA_OrderStatus, clickedItem.getOrderStatus());
+            detailIntent.putExtra(EXTRA_totalPrice, clickedItem.getTotalPrice());
+            detailIntent.putExtra(EXTRA_PIZZAID, clickedItem.getPizzaId());
+
+            startActivity(detailIntent2);
+            finish();//new
+        }
     }
 
 
@@ -364,7 +387,7 @@ System.out.println("SOOOOOO"+UserId+"asas   "+OrderedPizzaName+"asas   "+Ordered
     class HTTPResponseListner3 implements Response.Listener<String> {
         @Override
         public void onResponse(String response) {
-            Toast.makeText(OrderCRUD.this, response, Toast.LENGTH_SHORT).show();
+           // Toast.makeText(OrderCRUD.this, response, Toast.LENGTH_SHORT).show();
         }
     }
 

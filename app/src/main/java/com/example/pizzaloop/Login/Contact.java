@@ -1,4 +1,4 @@
-package com.example.pizzaloop;
+package com.example.pizzaloop.Login;
 
 public class Contact {
 

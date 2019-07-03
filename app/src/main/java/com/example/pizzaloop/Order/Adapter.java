@@ -1,4 +1,4 @@
-package com.example.pizzaloop;
+package com.example.pizzaloop.Order;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.pizzaloop.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.example.pizzaloop;
+package com.example.pizzaloop.Order;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,17 +13,19 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pizzaloop.R;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
 
-import static com.example.pizzaloop.ReviewMain.EXTRA_URL;
-import static com.example.pizzaloop.ReviewMain.EXTRA_details;
-import static com.example.pizzaloop.ReviewMain.EXTRA_name;
-import static com.example.pizzaloop.ReviewMain.EXTRA_pizzaId;
-import static com.example.pizzaloop.ReviewMain.EXTRA_price;
+import static com.example.pizzaloop.Order.MainActivity.EXTRA_URL;
+import static com.example.pizzaloop.Order.MainActivity.EXTRA_details;
+import static com.example.pizzaloop.Order.MainActivity.EXTRA_name;
+import static com.example.pizzaloop.Order.MainActivity.EXTRA_price;
+import static com.example.pizzaloop.Order.MainActivity.EXTRA_pizzaId;
 
-public class ReviewDetails extends AppCompatActivity {
+
+public class DetailActivity extends AppCompatActivity {
     public NumberPicker numberPicker;
     ImageButton imageButton;
     RadioGroup rg;
@@ -36,7 +38,7 @@ public class ReviewDetails extends AppCompatActivity {
 
 
 
-    public static String Pizzaname;
+   public static String Pizzaname;
     public  static  String PizId;
     //
 
@@ -63,14 +65,14 @@ public class ReviewDetails extends AppCompatActivity {
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ReviewDetails.this, MainActivity.class);
+                Intent intent = new Intent(DetailActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ReviewDetails.this, MainActivity.class);
+                Intent intent = new Intent(DetailActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -80,7 +82,7 @@ public class ReviewDetails extends AppCompatActivity {
         numberPicker.setMaxValue(5);
         Intent intent = getIntent();
         String imageUrl = intent.getStringExtra(EXTRA_URL);
-        PizId=intent.getStringExtra(EXTRA_pizzaId);
+         PizId=intent.getStringExtra(EXTRA_pizzaId);
         dprice = intent.getDoubleExtra(EXTRA_price, 0.00);
         Pizzaname = intent.getStringExtra(EXTRA_name);
         String details = intent.getStringExtra(EXTRA_details);
@@ -99,9 +101,9 @@ public class ReviewDetails extends AppCompatActivity {
 
     public void dorder(View v) {
 
-        Intent Dintent = new Intent(ReviewDetails.this, ReviewPayment.class);
+        Intent Dintent = new Intent(DetailActivity.this, Payment.class);
         startActivity(Dintent);
-        ReviewDetails detailActivity = new ReviewDetails();
+        DetailActivity detailActivity = new DetailActivity();
         Dintent.putExtra(EXTRA_QTY, z);
         Dintent.putExtra(EXTRA_LPRICE, lastPrice);
 

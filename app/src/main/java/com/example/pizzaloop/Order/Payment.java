@@ -1,4 +1,4 @@
-package com.example.pizzaloop;
+package com.example.pizzaloop.Order;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +16,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.pizzaloop.Login.LoginUser;
+import com.example.pizzaloop.R;
+import com.example.pizzaloop.WelcomePage;
+import com.example.pizzaloop.ipAddress;
 
 
 import java.util.Timer;
@@ -167,7 +171,7 @@ LoginUser loginUser= new LoginUser();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                Intent intent = new Intent(Payment.this,WelcomePage.class);
+                Intent intent = new Intent(Payment.this, WelcomePage.class);
                 startActivity(intent);
                 finish();
             }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/login_bg"
     android:orientation="vertical"
-    tools:context=".SignUp">
+    tools:context=".Login.SignUp">
 
     <ImageView
         android:layout_width="191dp"
@@ -65,6 +65,7 @@
             android:textSize="18dp" />
 
         <EditText
+            android:inputType="number"
             android:id="@+id/TFmnum"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -84,6 +85,7 @@
             android:textSize="18dp" />
 
         <EditText
+            android:inputType="textPassword"
             android:id="@+id/TFpass1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -102,6 +104,7 @@
             android:textSize="18dp" />
 
         <EditText
+            android:inputType="textPassword"
             android:id="@+id/TFpass2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -1,4 +1,4 @@
-package com.example.pizzaloop;
+package com.example.pizzaloop.Order;
 
 public class item_details {
     String BackgroundURL ;

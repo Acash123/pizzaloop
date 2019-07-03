@@ -158,7 +158,6 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/price"
-        android:text="TextView"
         android:textColor="#0D0E31"
         android:textSize="28dp"
         android:textStyle="bold"

@@ -1,4 +1,4 @@
-package com.example.pizzaloop;
+package com.example.pizzaloop.Login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.pizzaloop.R;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -93,5 +95,6 @@ public class SignUp extends AppCompatActivity {
     public void HaveAcc(View view){
         Intent intent=new Intent(this,LoginUser.class) ;
         startActivity(intent);
+        finish();
     }
 }

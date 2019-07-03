@@ -1,7 +1,6 @@
-package com.example.pizzaloop;
+package com.example.pizzaloop.Edit_Order;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -17,12 +16,17 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.pizzaloop.Order.MainActivity;
+import com.example.pizzaloop.Order.OrderAdapter;
+import com.example.pizzaloop.R;
+import com.example.pizzaloop.WelcomePage;
+import com.example.pizzaloop.ipAddress;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 
-import static com.example.pizzaloop.OrderCRUD.OrderID22;
+import static com.example.pizzaloop.Edit_Order.OrderCRUD.OrderID22;
 public class ReviewPayment extends AppCompatActivity {
 
     public  String OrderId = OrderID22;
@@ -47,7 +51,7 @@ public class ReviewPayment extends AppCompatActivity {
     EditText Address;
     EditText PhNumber;
     TextView Result;
-
+    OrderAdapter orderAdapter;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -58,6 +62,12 @@ public class ReviewPayment extends AppCompatActivity {
         PhNumber = findViewById(R.id.phoneNumber);
         Result = findViewById(R.id.textView2);
 
+        String phoneNo = orderAdapter.PHONENUMBER();
+        String address = orderAdapter.ADDRESS();
+
+
+        Address.setText(address);
+        PhNumber.setText(phoneNo);
 
 
     }
@@ -90,8 +100,9 @@ public class ReviewPayment extends AppCompatActivity {
 
 
     public void ExitPayment(View view) {
-        Intent intent = new Intent(ReviewPayment.this, MainActivity.class);
+        Intent intent = new Intent(ReviewPayment.this, OrderCRUD.class);
         startActivity(intent);
+        finish();
 
 
     }
@@ -142,46 +153,34 @@ public class ReviewPayment extends AppCompatActivity {
 
         // PaymentMethodDone
         //DiliverMethodDone
-
+        String userId=orderAdapter.USER_ID();
         DilAdress = (Address.getText().toString());
         TelNo = PhNumber.getText().toString();
 
         ipAddress ipAddress=new ipAddress();
         String ip=ipAddress.getIpAddress();
 
-        String URLO = "http://"+ip+":8080/demo/updateOrder?orderId=" + OrderID22 + "&userId=" + UserId + "&pizzaName=" + OrderedPizzaName + "&qty=" + OrderedQty + "&totalPrice=" + LastPrice + "&paymentMethod=" + PayMethod + "&phoneNumber=" + TelNo + "&Address=" + DilAdress + "&OrderStatus=" + orderStatus + "&pizzaId=" + pizzaId;
+
+        String URLO = "http://"+ip+":8080/demo/updateOrder?orderId=" + OrderID22 + "&userId=" + userId + "&pizzaName=" + OrderedPizzaName + "&qty=" + OrderedQty + "&totalPrice=" + LastPrice + "&paymentMethod=" + PayMethod + "&phoneNumber=" + TelNo + "&Address=" + DilAdress + "&OrderStatus=" + orderStatus + "&pizzaId=" + pizzaId;
         RequestQueue queue = (RequestQueue) Volley.newRequestQueue(ReviewPayment.this);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URLO,
                 new HTTPResponseListner(), new HTTPErrorListner());
         queue.add(stringRequest);
         Toast.makeText(this, "ORDER "+OrderID22+"Updated ", Toast.LENGTH_SHORT).show();
 
-        /*}
-        else {
-          OrderId= Integer.parseInt(Pass_EXTRA_OrderId);
-            String URLO = "http://192.168.8.185:8080/demo/updateOrder?orderId=" + OrderId + "&userId=" + UserId + "&pizzaName=" + OrderedPizzaName + "&qty=" + OrderedQty + "&totalPrice=" + LastPrice + "&paymentMethod=" + PayMethod + "&phoneNumber=" + TelNo + "&Address=" + DilAdress + "&OrderStatus=" + orderStatus + "&pizzaId=" + pizzaId;
-            RequestQueue queue = (RequestQueue) Volley.newRequestQueue(Payment.this);
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, URLO,
-                    new HTTPResponseListner(), new HTTPErrorListner());
-            queue.add(stringRequest);
-            Toast.makeText(this, "ORDER "+OrderId+"Updated ", Toast.LENGTH_SHORT).show();
 
-
-
-        }
-          */
         timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                Intent intent = new Intent(ReviewPayment.this,WelcomePage.class);
+                Intent intent = new Intent(ReviewPayment.this, WelcomePage.class);
                 startActivity(intent);
                 finish();
             }
         },1500);
+
+
     }
-
-
 
     class HTTPResponseListner implements Response.Listener<String> {
         @Override

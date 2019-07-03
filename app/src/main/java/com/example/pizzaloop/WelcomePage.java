@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ViewFlipper;
 
+import com.example.pizzaloop.Edit_Order.OrderCRUD;
+import com.example.pizzaloop.Order.MainActivity;
+
 public class WelcomePage extends AppCompatActivity {
     //
     ViewFlipper viewFlipper;
@@ -69,12 +72,12 @@ public class WelcomePage extends AppCompatActivity {
 
 
     public void OrderNow(View view) {
-        Intent intent=new Intent(this,MainActivity.class);
+        Intent intent=new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
     public void myOrders(View view) {
-        Intent intent= new Intent(this,OrderCRUD.class);
+        Intent intent= new Intent(this, OrderCRUD.class);
         startActivity(intent);
     }
 }

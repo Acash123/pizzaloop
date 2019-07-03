@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="250dp"
-    tools:context=".MainActivity">
+    tools:context=".Order.MainActivity">
 
     <ImageView
         android:id="@+id/card_background"

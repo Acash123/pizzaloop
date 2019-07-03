@@ -1,4 +1,4 @@
-package com.example.pizzaloop;
+package com.example.pizzaloop.Edit_Order;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +15,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.pizzaloop.Order.Adapter;
+import com.example.pizzaloop.R;
+import com.example.pizzaloop.ipAddress;
+import com.example.pizzaloop.Order.item_details;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,14 +26,16 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class ReviewMain extends AppCompatActivity implements Adapter.OnItemClickListener{
+public class ReviewOrder extends AppCompatActivity implements Adapter.OnItemClickListener {
+    //New Code variables
+    //New Code variables
     public static final String EXTRA_URL = "imageUrl";
     public static final String EXTRA_price = "price";
     public static final String EXTRA_details = "details";
     public static final String EXTRA_name = "name";
     public static final String EXTRA_pizzaId="pizzaId";
 
-
+    //
 
     //Member Variables
     private RecyclerView mRecyclerView;
@@ -64,7 +70,7 @@ public class ReviewMain extends AppCompatActivity implements Adapter.OnItemClick
 
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url,
-                null, new ReviewMain.HTTPResponseListner(), new ReviewMain.HTTPErrorListner());
+                null, new ReviewOrder.HTTPResponseListner(), new ReviewOrder.HTTPErrorListner());
 
         mRequestQueue.add(request);
 
@@ -74,13 +80,17 @@ public class ReviewMain extends AppCompatActivity implements Adapter.OnItemClick
     public void onItemClick(int position) {
         Intent detailIntent = new Intent(this, ReviewDetails.class);
         item_details clickedItem = mExampleList.get(position);
+        Intent intent = getIntent();
 
         detailIntent.putExtra(EXTRA_URL, clickedItem.getBackgroundURL());
         detailIntent.putExtra(EXTRA_name, clickedItem.getName());
         detailIntent.putExtra(EXTRA_price, clickedItem.getPrice());
         detailIntent.putExtra(EXTRA_details, clickedItem.getDetails());
         detailIntent.putExtra(EXTRA_pizzaId,clickedItem.getId());
+
         startActivity(detailIntent);
+
+finish();
     }
 
 
@@ -101,16 +111,15 @@ public class ReviewMain extends AppCompatActivity implements Adapter.OnItemClick
 
                     mExampleList.add(new item_details(name, price, url, details,id));
 
-                    mExampleAdapter = new Adapter(ReviewMain.this, mExampleList);
+                    mExampleAdapter = new Adapter(ReviewOrder.this, mExampleList);
                     mRecyclerView.setAdapter(mExampleAdapter);
-                    mExampleAdapter.setonItemClickListner(ReviewMain.this);
+                    mExampleAdapter.setonItemClickListner(ReviewOrder.this);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         }
-
     }
 
     class HTTPErrorListner implements Response.ErrorListener {

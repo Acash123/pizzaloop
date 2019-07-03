@@ -1,10 +1,10 @@
-package com.example.pizzaloop;
+package com.example.pizzaloop.Order;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -15,6 +15,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.pizzaloop.R;
+import com.example.pizzaloop.ipAddress;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,10 +24,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import static com.example.pizzaloop.OrderCRUD.EXTRA_PIZZAID;
-import static com.example.pizzaloop.OrderCRUD.EXTRA_OrderId;
-public class ReviewOrder extends AppCompatActivity implements Adapter.OnItemClickListener {
-    //New Code variables
+public class MainActivity extends AppCompatActivity implements Adapter.OnItemClickListener {
     //New Code variables
     public static final String EXTRA_URL = "imageUrl";
     public static final String EXTRA_price = "price";
@@ -33,7 +32,7 @@ public class ReviewOrder extends AppCompatActivity implements Adapter.OnItemClic
     public static final String EXTRA_name = "name";
     public static final String EXTRA_pizzaId="pizzaId";
 
-    //
+
 
     //Member Variables
     private RecyclerView mRecyclerView;
@@ -68,7 +67,7 @@ public class ReviewOrder extends AppCompatActivity implements Adapter.OnItemClic
 
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url,
-                null, new ReviewOrder.HTTPResponseListner(), new ReviewOrder.HTTPErrorListner());
+                null, new HTTPResponseListner(), new HTTPErrorListner());
 
         mRequestQueue.add(request);
 
@@ -76,9 +75,8 @@ public class ReviewOrder extends AppCompatActivity implements Adapter.OnItemClic
 
     @Override
     public void onItemClick(int position) {
-        Intent detailIntent = new Intent(this, ReviewDetails.class);
+        Intent detailIntent = new Intent(this, DetailActivity.class);
         item_details clickedItem = mExampleList.get(position);
-        Intent intent = getIntent();
 
         detailIntent.putExtra(EXTRA_URL, clickedItem.getBackgroundURL());
         detailIntent.putExtra(EXTRA_name, clickedItem.getName());
@@ -87,8 +85,6 @@ public class ReviewOrder extends AppCompatActivity implements Adapter.OnItemClic
         detailIntent.putExtra(EXTRA_pizzaId,clickedItem.getId());
 
         startActivity(detailIntent);
-
-
     }
 
 
@@ -109,16 +105,17 @@ public class ReviewOrder extends AppCompatActivity implements Adapter.OnItemClic
 
                     mExampleList.add(new item_details(name, price, url, details,id));
 
-                    mExampleAdapter = new Adapter(ReviewOrder.this, mExampleList);
+                    mExampleAdapter = new Adapter(MainActivity.this, mExampleList);
                     mRecyclerView.setAdapter(mExampleAdapter);
-                    mExampleAdapter.setonItemClickListner(ReviewOrder.this);
+                    mExampleAdapter.setonItemClickListner(MainActivity.this);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         }
-    }
+
+         }
 
     class HTTPErrorListner implements Response.ErrorListener {
         @Override

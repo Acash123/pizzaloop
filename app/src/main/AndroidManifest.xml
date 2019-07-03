@@ -12,27 +12,27 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginUser"
+        <activity android:name=".Login.LoginUser"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ReviewOrder"/>
-        <activity android:name=".EditOrder"/>
-        <activity android:name=".OrderCRUD"
+        <activity android:name=".Edit_Order.ReviewOrder"/>
+        <activity android:name=".Edit_Order.EditOrder"/>
+        <activity android:name=".Edit_Order.OrderCRUD"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ReviewPayment"/>
-        <activity android:name=".Payment"
+        <activity android:name=".Edit_Order.ReviewPayment"/>
+        <activity android:name=".Order.Payment"
             android:screenOrientation="portrait"/>
         <activity android:name=".WelcomePage"
             android:screenOrientation="portrait"/>
-        <activity android:name=".SignUp"
+        <activity android:name=".Login.SignUp"
             android:screenOrientation="portrait"/>
-        <activity android:name=".DetailActivity"
+        <activity android:name=".Order.DetailActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".MainActivity"
+        <activity android:name=".Order.MainActivity"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".ReviewDetails"/>
-        <activity android:name=".ReviewMain"/>
-        <activity android:name=".SplashScreen"
+        <activity android:name=".Edit_Order.ReviewDetails"/>
+        <activity android:name=".Edit_Order.ReviewMain"/>
+        <activity android:name=".Login.SplashScreen"
             android:screenOrientation="portrait">
 
             <intent-filter>

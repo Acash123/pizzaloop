@@ -1,10 +1,10 @@
-package com.example.pizzaloop;
+package com.example.pizzaloop.Edit_Order;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -15,6 +15,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.pizzaloop.Order.Adapter;
+import com.example.pizzaloop.R;
+import com.example.pizzaloop.ipAddress;
+import com.example.pizzaloop.Order.item_details;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,8 +26,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements Adapter.OnItemClickListener {
-    //New Code variables
+public class ReviewMain extends AppCompatActivity implements Adapter.OnItemClickListener {
     public static final String EXTRA_URL = "imageUrl";
     public static final String EXTRA_price = "price";
     public static final String EXTRA_details = "details";
@@ -65,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements Adapter.OnItemCli
 
 
         JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url,
-                null, new HTTPResponseListner(), new HTTPErrorListner());
+                null, new ReviewMain.HTTPResponseListner(), new ReviewMain.HTTPErrorListner());
 
         mRequestQueue.add(request);
 
@@ -73,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements Adapter.OnItemCli
 
     @Override
     public void onItemClick(int position) {
-        Intent detailIntent = new Intent(this, DetailActivity.class);
+        Intent detailIntent = new Intent(this, ReviewDetails.class);
         item_details clickedItem = mExampleList.get(position);
 
         detailIntent.putExtra(EXTRA_URL, clickedItem.getBackgroundURL());
@@ -81,8 +84,8 @@ public class MainActivity extends AppCompatActivity implements Adapter.OnItemCli
         detailIntent.putExtra(EXTRA_price, clickedItem.getPrice());
         detailIntent.putExtra(EXTRA_details, clickedItem.getDetails());
         detailIntent.putExtra(EXTRA_pizzaId,clickedItem.getId());
-
         startActivity(detailIntent);
+        finish();
     }
 
 
@@ -103,9 +106,9 @@ public class MainActivity extends AppCompatActivity implements Adapter.OnItemCli
 
                     mExampleList.add(new item_details(name, price, url, details,id));
 
-                    mExampleAdapter = new Adapter(MainActivity.this, mExampleList);
+                    mExampleAdapter = new Adapter(ReviewMain.this, mExampleList);
                     mRecyclerView.setAdapter(mExampleAdapter);
-                    mExampleAdapter.setonItemClickListner(MainActivity.this);
+                    mExampleAdapter.setonItemClickListner(ReviewMain.this);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -113,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements Adapter.OnItemCli
             }
         }
 
-         }
+    }
 
     class HTTPErrorListner implements Response.ErrorListener {
         @Override

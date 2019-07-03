@@ -1,4 +1,4 @@
-package com.example.pizzaloop;
+package com.example.pizzaloop.Login;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -6,16 +6,15 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.design.widget.TextInputEditText;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.pizzaloop.R;
+import com.example.pizzaloop.WelcomePage;
 
 
 public class LoginUser extends AppCompatActivity {
@@ -45,16 +44,20 @@ public class LoginUser extends AppCompatActivity {
             EditText b = (EditText) findViewById(R.id.TFpassword);
             String pass = b.getText().toString();
             setUserId(a.getText().toString());
-            System.out.println("HEeeeeeeeeeeeeeeeeeeeeee" + getUserId() );
             String password = helper.searchPass(str);
 
-            if (pass.equals(password)) {
+            if (pass.equals(password) && checkNetworkConnectionStatus()) {
 
                 Intent i = new Intent(LoginUser.this, WelcomePage.class);
                 i.putExtra("Username", str);
                 startActivity(i);
+                finish();
 
-            } else {
+            }else if(checkNetworkConnectionStatus()==false){
+                Toast temp= Toast.makeText(LoginUser.this,"CHECK YOUR CONNECTION",Toast.LENGTH_SHORT);
+                temp.show();
+            }
+            else {
                 Toast temp = Toast.makeText(LoginUser.this,"Wrong !!" , Toast.LENGTH_SHORT);
                 temp.show();
             }
@@ -88,31 +91,6 @@ public class LoginUser extends AppCompatActivity {
         return status;
     }
 
-
-    private void validate(String userName, String userPassword) {
-        if ((userName.equals("0717588894")) && (userPassword.equals("1234")) && checkNetworkConnectionStatus()) {
-            Intent intent = new Intent(LoginUser.this, WelcomePage.class);
-            startActivity(intent);
-            finish();
-        }
-        else if((userName.isEmpty())){
-            Name.setError("Enter Your Mobile Number");
-        } else if((userName.length()>10)){
-            System.out.println(userName);
-            Name.setError("Format 07x xxx xxxx");
-        }
-
-        else if((password.isEmpty())){
-            Password.setError("Password Required");
-        }
-
-        else if(!(userPassword.equals("1234"))){
-            Password.setError("Invalid Password");
-        }
-        else if(!(userName.equals("0717588894"))) {
-            Name.setError("Invalid UserName");
-        }
-    }
 
     //PopUp msg for Exit
     @Override
